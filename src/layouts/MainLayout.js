@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import Header from "../components/common/Header";
-import NavigationBar from "../components/common/NavigationBar";
+import NavigationBar from "../components/common/NavbarComponent";
 import Footer from "../components/common/Footer";
 
 function MainLayout() {
