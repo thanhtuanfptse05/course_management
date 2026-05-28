@@ -9,7 +9,7 @@ function Header() {
         <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
             <Container>
                 <Navbar.Brand as={Link} to="/">
-                    📚 CourseMGT
+                    CourseManagement
                 </Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="main-nav" />
