@@ -1,0 +1,67 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Admin User",
+            "email": "admin@fpt.edu.vn",
+            "password": "123456",
+            "role": "admin"
+        },
+        {
+            "id": 2,
+            "name": "John Instructor",
+            "email": "instructor@fpt.edu.vn",
+            "password": "123456",
+            "role": "instructor"
+        },
+        {
+            "id": 3,
+            "name": "Jane Student",
+            "email": "student@fpt.edu.vn",
+            "password": "123456",
+            "role": "student"
+        }
+    ],
+    "courses": [
+        {
+            "id": 1,
+            "title": "ReactJS Fundamentals",
+            "description": "Learn React from scratch",
+            "categoryId": 1,
+            "instructorId": 2,
+            "price": 0,
+            "status": "active"
+        },
+        {
+            "id": 2,
+            "title": "Node.js Basics",
+            "description": "Backend with Node",
+            "categoryId": 2,
+            "instructorId": 2,
+            "price": 29,
+            "status": "active"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "Web Development"
+        },
+        {
+            "id": 2,
+            "name": "Backend"
+        },
+        {
+            "id": 3,
+            "name": "Design"
+        }
+    ],
+    "enrollments": [
+        {
+            "id": 1,
+            "studentId": 3,
+            "courseId": 1,
+            "status": "approved"
+        }
+    ]
+}
