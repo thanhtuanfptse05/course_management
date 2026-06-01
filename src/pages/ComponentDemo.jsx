@@ -81,7 +81,7 @@ function ComponentDemo() {
         description: '',
     });
 
-    const productsPerPage = 3;
+    const productsPerPage = 2; // Giảm xuống 2 để hiển thị nhiều trang hơn cho Demo
     const filteredProducts = useMemo(
         () =>
             allProducts.filter((product) =>
