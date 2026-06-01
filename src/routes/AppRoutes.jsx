@@ -8,6 +8,7 @@ import NotFound from '../components/common/NotFound';
 import StudentDashboard from '../pages/student/StudentDashboard';
 import InstructorDashboard from '../pages/instructor/InstructorDashboard';
 import AdminDashboard from '../pages/admin/AdminDashboard';
+import ComponentDemo from '../pages/ComponentDemo';
 
 function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ function AppRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/demo" element={<ComponentDemo />} />
 
             {/* Student routes */}
             <Route path="/student/dashboard" element={<StudentDashboard />} />

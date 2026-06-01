@@ -1,0 +1,23 @@
+.product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
+}
+
+.product-card-image {
+    min-height: 180px;
+    object-fit: cover;
+}
+
+.sidebar-menu {
+    min-height: 280px;
+}
+
+@media (max-width: 991px) {
+    .sidebar-menu {
+        min-height: auto;
+    }
+}
