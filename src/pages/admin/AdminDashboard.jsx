@@ -13,8 +13,7 @@ function AdminDashboard() {
     const [stats, setStats] = useState({
         totalCourses: 0,
         totalStudents: 0,
-        totalInstructors: 0,
-        totalRevenue: 0
+        totalInstructors: 0
     });
     const [recentCourses, setRecentCourses] = useState([]);
     const [recentEnrollments, setRecentEnrollments] = useState([]);
@@ -34,22 +33,10 @@ function AdminDashboard() {
                 const totalStudents = users.filter(u => u.role === 'student').length;
                 const totalInstructors = users.filter(u => u.role === 'instructor').length;
 
-                // Tính doanh thu giả lập: Tổng (giá khóa học * số enrollment đã approved)
-                let totalRevenue = 0;
-                enrollments.forEach(enrollment => {
-                    if (enrollment.status === 'approved') {
-                        const course = courses.find(c => c.id === enrollment.courseId);
-                        if (course) {
-                            totalRevenue += (course.price || 0);
-                        }
-                    }
-                });
-
                 setStats({
                     totalCourses,
                     totalStudents,
-                    totalInstructors,
-                    totalRevenue
+                    totalInstructors
                 });
 
                 // Lấy 5 khóa học gần đây nhất
@@ -107,7 +94,7 @@ function AdminDashboard() {
 
             {/* Stats Cards Row */}
             <Row className="g-3 g-lg-4 mb-5">
-                <Col xs={12} sm={6} lg={3}>
+                <Col xs={12} sm={6} lg={4}>
                     <StatCard
                         title="Tổng khóa học"
                         value={stats.totalCourses}
@@ -122,7 +109,7 @@ function AdminDashboard() {
                         }
                     />
                 </Col>
-                <Col xs={12} sm={6} lg={3}>
+                <Col xs={12} sm={6} lg={4}>
                     <StatCard
                         title="Tổng học viên"
                         value={stats.totalStudents}
@@ -135,7 +122,7 @@ function AdminDashboard() {
                         }
                     />
                 </Col>
-                <Col xs={12} sm={6} lg={3}>
+                <Col xs={12} sm={12} lg={4}>
                     <StatCard
                         title="Giảng viên"
                         value={stats.totalInstructors}
@@ -145,20 +132,6 @@ function AdminDashboard() {
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-workspace" viewBox="0 0 16 16">
                                 <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                                 <path d="M14 8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5zM2 12h12v.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/>
-                            </svg>
-                        }
-                    />
-                </Col>
-                <Col xs={12} sm={6} lg={3}>
-                    <StatCard
-                        title="Doanh thu giả lập"
-                        value={formatCurrency(stats.totalRevenue)}
-                        color="danger"
-                        subtitle="Đăng ký đã duyệt"
-                        icon={
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-cash-stack" viewBox="0 0 16 16">
-                                <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
-                                <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
                             </svg>
                         }
                     />
