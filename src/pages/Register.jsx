@@ -1,34 +1,42 @@
-// [AI Generated Code - Prompt: "Thiết kế giao diện Đăng ký màu Xanh biển - Trắng, xác thực real-time và đo độ mạnh mật khẩu bằng tiếng Việt"]
+// [AI Generated Code - Prompt: "Thiết kế trang Register dùng Card, InputGroup bằng Tiếng Việt, đo độ mạnh mật khẩu, xử lý đăng ký qua AuthContext và tự động chuyển hướng"]
 import React, { useState } from 'react';
-import { Container, Form, Button, Card, Alert, InputGroup, Spinner } from 'react-bootstrap';
+import { Container, Card, Form, Button, Alert, InputGroup, Spinner } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import { useAuth } from '../contexts/AuthContext';
 
 function Register() {
+    const { register } = useAuth();
     const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
         password: '',
         confirmPassword: '',
+        role: 'student', // Vai trò mặc định
     });
+
     const [errors, setErrors] = useState({
         fullName: '',
         email: '',
         password: '',
         confirmPassword: '',
     });
+
     const [touched, setTouched] = useState({
         fullName: false,
         email: false,
         password: false,
         confirmPassword: false,
     });
+
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
     // Đánh giá độ mạnh của mật khẩu
     const getPasswordStrength = (password) => {
@@ -90,15 +98,12 @@ function Register() {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
 
-        // Nếu trường đã tương tác (touched), cập nhật lỗi real-time
         if (touched[name]) {
             setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
         }
 
-        // Trường hợp người dùng đang đổi mật khẩu chính, cần xác thực lại ô ConfirmPassword nếu đã gõ
         if (name === 'password' && touched.confirmPassword) {
             const confirmVal = formData.confirmPassword;
-            // Cập nhật lỗi của confirmPassword theo password mới
             setErrors(prev => ({ 
                 ...prev, 
                 confirmPassword: confirmVal !== value ? 'Mật khẩu xác nhận không khớp.' : '' 
@@ -112,10 +117,11 @@ function Register() {
         setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setSubmitError('');
+        setSuccess(false);
 
-        // Đánh dấu touched tất cả các trường
         setTouched({
             fullName: true,
             email: true,
@@ -139,26 +145,24 @@ function Register() {
 
         setLoading(true);
 
-        // Giả lập API call 1.5 giây lưu trữ người dùng
-        setTimeout(() => {
-            setLoading(false);
+        try {
+            await register(
+                formData.fullName,
+                formData.email,
+                formData.password,
+                formData.role
+            );
             setSuccess(true);
-
-            // Mock: Đăng ký thành công, lưu thông tin tài khoản mới để sau này có thể dùng test
-            const registeredUsers = JSON.parse(localStorage.getItem('registered_users') || '[]');
-            registeredUsers.push({
-                email: formData.email,
-                password: formData.password,
-                fullName: formData.fullName,
-                role: 'student' // Mặc định tài khoản đăng ký mới là student
-            });
-            localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
-
+            
             // Tự động chuyển hướng về trang Đăng nhập sau 2 giây
             setTimeout(() => {
                 navigate('/login');
             }, 2000);
-        }, 1500);
+        } catch (err) {
+            setSubmitError(err.message || 'Đăng ký thất bại. Vui lòng thử lại.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const strength = getPasswordStrength(formData.password);
@@ -166,63 +170,102 @@ function Register() {
     return (
         <div className="d-flex flex-column min-vh-100">
             <Header />
-            <Container className="d-flex justify-content-center align-items-center flex-grow-1 py-5">
+            <Container className="d-flex align-items-center justify-content-center flex-grow-1 py-5">
                 <Card className="premium-card p-4 shadow-sm" style={{ width: '100%', maxWidth: '480px' }}>
                     <Card.Body className="p-2">
                         <div className="text-center mb-4">
-                            <h2 className="fw-bold text-primary mb-1" style={{ color: 'var(--primary-blue)' }}>ĐĂNG KÝ</h2>
+                            <i className="bi bi-person-plus text-primary display-4 mb-2"></i>
+                            <h2 className="fw-bold text-navy mb-1" style={{ color: 'var(--text-navy)' }}>ĐĂNG KÝ</h2>
                             <p className="text-muted small">Tạo tài khoản mới để bắt đầu học tập và quản lý</p>
                         </div>
 
                         {success && (
-                            <Alert variant="success" className="py-2.5">
-                                Đăng ký thành công! Đang chuyển hướng sang Đăng nhập...
+                            <Alert variant="success" className="py-2.5 small">
+                                <i className="bi bi-check-circle-fill me-2"></i>
+                                Đăng ký thành công! Đang tự động chuyển hướng sang trang đăng nhập...
+                            </Alert>
+                        )}
+
+                        {submitError && (
+                            <Alert variant="danger" className="py-2.5 small">
+                                <i className="bi bi-exclamation-triangle-fill me-2"></i>
+                                {submitError}
                             </Alert>
                         )}
 
                         <Form onSubmit={handleSubmit} noValidate>
                             {/* Họ và tên */}
                             <Form.Group className="mb-3" controlId="registerName">
-                                <Form.Label className="fw-medium text-secondary small">Họ và tên</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="fullName"
-                                    placeholder="Nguyễn Văn A"
-                                    value={formData.fullName}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isInvalid={touched.fullName && !!errors.fullName}
-                                    disabled={loading || success}
-                                    className="py-2"
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.fullName}
-                                </Form.Control.Feedback>
+                                <Form.Label className="small fw-semibold text-navy">Họ và tên</Form.Label>
+                                <InputGroup hasValidation>
+                                    <InputGroup.Text>
+                                        <i className="bi bi-person"></i>
+                                    </InputGroup.Text>
+                                    <Form.Control
+                                        type="text"
+                                        name="fullName"
+                                        placeholder="Nguyễn Văn A"
+                                        value={formData.fullName}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        isInvalid={touched.fullName && !!errors.fullName}
+                                        disabled={loading || success}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.fullName}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
                             </Form.Group>
 
                             {/* Email */}
                             <Form.Group className="mb-3" controlId="registerEmail">
-                                <Form.Label className="fw-medium text-secondary small">Địa chỉ Email</Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    name="email"
-                                    placeholder="sinhvien@fpt.edu.vn"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isInvalid={touched.email && !!errors.email}
-                                    disabled={loading || success}
-                                    className="py-2"
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.email}
-                                </Form.Control.Feedback>
+                                <Form.Label className="small fw-semibold text-navy">Địa chỉ Email</Form.Label>
+                                <InputGroup hasValidation>
+                                    <InputGroup.Text>
+                                        <i className="bi bi-envelope"></i>
+                                    </InputGroup.Text>
+                                    <Form.Control
+                                        type="email"
+                                        name="email"
+                                        placeholder="sinhvien@fpt.edu.vn"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        isInvalid={touched.email && !!errors.email}
+                                        disabled={loading || success}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.email}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                            </Form.Group>
+
+                            {/* Vai trò */}
+                            <Form.Group className="mb-3" controlId="registerRole">
+                                <Form.Label className="small fw-semibold text-navy">Vai trò đăng ký</Form.Label>
+                                <InputGroup hasValidation>
+                                    <InputGroup.Text>
+                                        <i className="bi bi-person-workspace"></i>
+                                    </InputGroup.Text>
+                                    <Form.Select
+                                        name="role"
+                                        value={formData.role}
+                                        onChange={handleChange}
+                                        disabled={loading || success}
+                                    >
+                                        <option value="student">Học viên (Student)</option>
+                                        <option value="instructor">Giảng viên (Instructor)</option>
+                                    </Form.Select>
+                                </InputGroup>
                             </Form.Group>
 
                             {/* Mật khẩu */}
                             <Form.Group className="mb-3" controlId="registerPassword">
-                                <Form.Label className="fw-medium text-secondary small">Mật khẩu</Form.Label>
+                                <Form.Label className="small fw-semibold text-navy">Mật khẩu</Form.Label>
                                 <InputGroup hasValidation>
+                                    <InputGroup.Text>
+                                        <i className="bi bi-lock"></i>
+                                    </InputGroup.Text>
                                     <Form.Control
                                         type={showPassword ? 'text' : 'password'}
                                         name="password"
@@ -232,7 +275,6 @@ function Register() {
                                         onBlur={handleBlur}
                                         isInvalid={touched.password && !!errors.password}
                                         disabled={loading || success}
-                                        className="py-2"
                                     />
                                     <Button
                                         variant="outline-secondary"
@@ -240,7 +282,7 @@ function Register() {
                                         disabled={loading || success}
                                         style={{ borderTopRightRadius: '0.375rem', borderBottomRightRadius: '0.375rem' }}
                                     >
-                                        {showPassword ? 'Ẩn' : 'Hiện'}
+                                        {showPassword ? <i className="bi bi-eye-slash"></i> : <i className="bi bi-eye"></i>}
                                     </Button>
                                     <Form.Control.Feedback type="invalid">
                                         {errors.password}
@@ -271,8 +313,11 @@ function Register() {
 
                             {/* Xác nhận mật khẩu */}
                             <Form.Group className="mb-4" controlId="registerConfirmPassword">
-                                <Form.Label className="fw-medium text-secondary small">Xác nhận mật khẩu</Form.Label>
+                                <Form.Label className="small fw-semibold text-navy">Xác nhận mật khẩu</Form.Label>
                                 <InputGroup hasValidation>
+                                    <InputGroup.Text>
+                                        <i className="bi bi-shield-lock"></i>
+                                    </InputGroup.Text>
                                     <Form.Control
                                         type={showConfirmPassword ? 'text' : 'password'}
                                         name="confirmPassword"
@@ -282,7 +327,6 @@ function Register() {
                                         onBlur={handleBlur}
                                         isInvalid={touched.confirmPassword && !!errors.confirmPassword}
                                         disabled={loading || success}
-                                        className="py-2"
                                     />
                                     <Button
                                         variant="outline-secondary"
@@ -290,7 +334,7 @@ function Register() {
                                         disabled={loading || success}
                                         style={{ borderTopRightRadius: '0.375rem', borderBottomRightRadius: '0.375rem' }}
                                     >
-                                        {showConfirmPassword ? 'Ẩn' : 'Hiện'}
+                                        {showConfirmPassword ? <i className="bi bi-eye-slash"></i> : <i className="bi bi-eye"></i>}
                                     </Button>
                                     <Form.Control.Feedback type="invalid">
                                         {errors.confirmPassword}
@@ -302,24 +346,27 @@ function Register() {
                             <Button
                                 type="submit"
                                 variant="primary"
-                                className="w-100 py-2.5 fw-semibold mb-3 btn-primary text-white d-flex align-items-center justify-content-center"
+                                className="w-100 py-2.5 fw-semibold mb-3 btn-primary text-white d-flex align-items-center justify-content-center gap-2"
                                 disabled={loading || success}
                                 style={{ height: '45px' }}
                             >
                                 {loading ? (
                                     <>
-                                        <Spinner animation="border" size="sm" className="me-2" />
-                                        Đang tạo tài khoản...
+                                        <Spinner animation="border" size="sm" role="status" aria-hidden="true" />
+                                        <span>Đang đăng ký...</span>
                                     </>
                                 ) : (
-                                    'Đăng ký tài khoản'
+                                    <span>Đăng ký</span>
                                 )}
                             </Button>
                         </Form>
 
                         {/* Navigation Links */}
-                        <div className="text-center mt-3 small text-muted">
-                            Đã có tài khoản? <Link to="/login" className="text-decoration-none fw-medium text-primary">Đăng nhập ngay</Link>
+                        <div className="text-center mt-3">
+                            <span className="small text-muted">Đã có tài khoản? </span>
+                            <Link to="/login" className="small text-decoration-none fw-semibold text-primary">
+                                Đăng nhập
+                            </Link>
                         </div>
                     </Card.Body>
                 </Card>
