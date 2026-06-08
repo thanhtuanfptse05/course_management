@@ -7,6 +7,7 @@ import Register from '../pages/Register';
 import NotFound from '../components/common/NotFound';
 import StudentDashboard from '../pages/student/StudentDashboard';
 import InstructorDashboard from '../pages/instructor/InstructorDashboard';
+import EnrolledStudents from '../pages/instructor/EnrolledStudents';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import ComponentDemo from '../pages/ComponentDemo';
 
@@ -24,6 +25,7 @@ function AppRoutes() {
 
             {/* Instructor routes */}
             <Route path="/instructor/dashboard" element={<InstructorDashboard />} />
+            <Route path="/instructor/courses/:courseId/students" element={<EnrolledStudents />} />
 
             {/* Admin routes */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />

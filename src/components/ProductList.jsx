@@ -14,7 +14,7 @@ function ProductList({ products = [], onViewDetail }) {
                     <ProductCard
                         image={product.image}
                         title={product.title}
-                        description={product.description}
+                        description={product.description}   
                         price={product.price}
                         category={product.category}
                         onViewDetail={() => onViewDetail?.(product)}

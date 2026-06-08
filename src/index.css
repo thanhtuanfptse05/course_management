@@ -1,23 +1,107 @@
+/* Custom variables for Blue and White theme */
+:root {
+  --primary-blue: #0f52ba;
+  --secondary-blue: #3b82f6;
+  --light-blue: #e0f2fe;
+  --bg-light: #f8fafc;
+  --text-navy: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body {
+  background-color: var(--bg-light) !important;
+  color: var(--text-navy) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom Primary Button override */
+.btn-primary {
+  background-color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0d47a1 !important;
+  border-color: #0d47a1 !important;
+  box-shadow: 0 4px 12px rgba(15, 82, 186, 0.2) !important;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-outline-primary {
+  border-color: var(--primary-blue) !important;
+  color: var(--primary-blue) !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-blue) !important;
+  color: #ffffff !important;
+}
+
+/* Cards Hover Animation */
+.premium-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(15, 82, 186, 0.06) !important;
+}
+
+/* Product card (legacy) */
 .product-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
 }
 
 .product-card-image {
-    min-height: 180px;
-    object-fit: cover;
+  min-height: 180px;
+  object-fit: cover;
+}
+
+/* Sidebar Active Item styling */
+.custom-sidebar .list-group-item.active {
+  background-color: var(--light-blue) !important;
+  color: var(--primary-blue) !important;
+  border-left: 4px solid var(--primary-blue) !important;
+  border-color: transparent var(--border-color) transparent transparent;
+  font-weight: 600;
 }
 
 .sidebar-menu {
-    min-height: 280px;
+  min-height: 280px;
+}
+
+/* Form focus override */
+.form-control:focus,
+.form-select:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Form Switch color */
+.form-check-input:checked {
+  background-color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
 }
 
 @media (max-width: 991px) {
-    .sidebar-menu {
-        min-height: auto;
-    }
+  .sidebar-menu {
+    min-height: auto;
+  }
 }
