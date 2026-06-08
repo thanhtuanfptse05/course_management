@@ -1,0 +1,154 @@
+/* [AI Generated Code - Prompt: "CSS riêng cho trang Home - Hero gradient xanh biển, Search bar, Filter select, tiêu đề section, empty state"] */
+
+/* ── Hero Section ─────────────────────────────────────── */
+.home-hero {
+    background: linear-gradient(135deg, #0f52ba 0%, #3b82f6 60%, #06b6d4 100%);
+    padding: 90px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hiệu ứng vòng trang trí phía sau */
+.home-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -80px;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+}
+
+.home-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -60px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+}
+
+.home-hero-subtitle {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.home-hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+}
+
+.home-hero-highlight {
+    color: #bae6fd; /* xanh nhạt nổi bật trên nền gradient */
+}
+
+.home-hero-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.home-hero-btn {
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 10px;
+    color: #0f52ba;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Search & Filter Section ──────────────────────────── */
+.home-search-section {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(15, 82, 186, 0.05);
+}
+
+.home-search-input-group {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid #e2e8f0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-search-input-group:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.home-search-icon {
+    background-color: #f8fafc;
+    border: none;
+    padding: 0 14px;
+}
+
+.home-search-control {
+    border: none;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    background-color: #ffffff;
+}
+
+.home-search-control:focus {
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+.home-filter-select {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    color: #334155;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.home-filter-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ── Course list section ──────────────────────────────── */
+.home-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.home-course-count {
+    font-size: 0.875rem;
+    color: #64748b;
+    background-color: #f1f5f9;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* ── Empty state ──────────────────────────────────────── */
+.home-empty-state {
+    background-color: #f8fafc;
+    border-radius: 16px;
+    border: 2px dashed #e2e8f0;
+    padding: 48px 24px !important;
+}
+
+.home-empty-icon {
+    font-size: 3rem;
+}
