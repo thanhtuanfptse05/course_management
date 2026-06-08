@@ -1,13 +1,14 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './routes/AppRoutes';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Content from './components/Content';
 
 function App() {
     return (
-        <BrowserRouter>
-            <AppRoutes />
-        </BrowserRouter>
+        <div className="container-fluid mt-4">
+            {/* Gọi component Content */}
+            <Content />
+        </div>
     );
 }
 
-export default App;
+export default App;
