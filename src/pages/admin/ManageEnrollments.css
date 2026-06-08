@@ -1,0 +1,60 @@
+/* [AI Generated Code - Prompt: "Tạo cấu trúc component và tích hợp CSS riêng cho màn hình Manage Enrollments với chuẩn Ocean Blue & White"] */
+
+/* ManageEnrollments.css */
+.enrollments-container {
+    background-color: #f8fafc; /* Light Gray BG */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.page-title {
+    color: #0f52ba; /* Primary Blue */
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.table-enrollments {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.table-enrollments thead {
+    background-color: #e0f2fe; /* Light Blue Accent */
+    color: #0f172a; /* Dark Navy */
+}
+
+/* Custom Buttons */
+.btn-approve {
+    background-color: #10b981; /* Success Green */
+    color: white;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-approve:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-reject {
+    background-color: #ef4444; /* Danger Red */
+    color: white;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-reject:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Status Badge inside table if needed */
+.badge-pending {
+    background-color: #f59e0b; /* Warning Yellow */
+    color: white;
+}

@@ -1,0 +1,81 @@
+/* [AI Generated Code - Prompt: "Tạo CSS cho Manage Courses với UI Rule"] */
+
+/* ManageCourses.css */
+.courses-container {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.page-title {
+    color: #0f52ba;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.course-summary-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    margin-bottom: 20px;
+}
+
+.course-summary-card h3 {
+    color: #0f52ba;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.course-summary-card p {
+    color: #64748b;
+    margin: 0;
+}
+
+/* Table Styling */
+.table-courses {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.table-courses thead {
+    background-color: #e0f2fe;
+    color: #0f172a;
+}
+
+/* Buttons */
+.btn-approve-course {
+    background-color: #3b82f6; /* Secondary Blue for Courses approve */
+    color: white;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.btn-approve-course:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+.btn-hide-course {
+    background-color: #f59e0b; /* Warning Yellow for Hide */
+    color: white;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.btn-hide-course:hover {
+    background-color: #d97706;
+    transform: translateY(-2px);
+}
+
+.badge-active {
+    background-color: #10b981;
+}
+
+.badge-hidden {
+    background-color: #64748b;
+}
