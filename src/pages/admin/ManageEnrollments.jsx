@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { Container, Row, Col, Table, Badge, Button, Form } from 'react-bootstrap';
+import Header from '../../components/layout/Header';
+import Footer from '../../components/layout/Footer';
+import Sidebar from '../../components/layout/Sidebar';
 import './ManageEnrollments.css';
 
 // 1. Component Filter (Điều hướng / Lọc dữ liệu)
@@ -74,21 +77,24 @@ class EnrollmentTable extends React.Component {
 class ManageEnrollments extends React.Component {
     render() {
         return (
-            <div className="enrollments-container">
-                <Container fluid>
-                    <Row>
-                        <Col md={12}>
-                            {/* Gọi Component Filter */}
-                            <EnrollmentFilter />
+            <div className="d-flex flex-column min-vh-100">
+                <Header />
+                <Container className="py-4 flex-grow-1">
+                    <Row className="gx-4">
+                        <Col lg={3} md={4} className="mb-4">
+                            <Sidebar />
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            {/* Gọi Component Table */}
-                            <EnrollmentTable />
+                        <Col lg={9} md={8}>
+                            <div className="enrollments-container">
+                                {/* Gọi Component Filter */}
+                                <EnrollmentFilter />
+                                {/* Gọi Component Table */}
+                                <EnrollmentTable />
+                            </div>
                         </Col>
                     </Row>
                 </Container>
+                <Footer />
             </div>
         );
     }

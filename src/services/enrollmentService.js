@@ -1,11 +1,9 @@
-// [AI Generated Code - Prompt: "enrollmentService lấy học viên đăng ký theo khóa học"]
+// [AI Generated Code - Prompt: "Tạo Enrollment service lấy thông tin đăng ký lớp học bằng Axios nối với json-server, tương thích các hàm xuất lẻ"]
 import api from './api';
 
-// Lấy tất cả enrollments theo courseId
 export const getEnrollmentsByCourse = (courseId) =>
     api.get(`/enrollments?courseId=${courseId}`).then(res => res.data);
 
-// Lấy thông tin học viên (join users) theo courseId
 export const getStudentsByCourse = async (courseId) => {
     const [enrollments, users] = await Promise.all([
         api.get(`/enrollments?courseId=${courseId}`).then(res => res.data),
@@ -24,7 +22,20 @@ export const getStudentsByCourse = async (courseId) => {
     });
 };
 
-// Đếm số học viên (approved) theo courseId
 export const countApprovedStudents = (courseId) =>
     api.get(`/enrollments?courseId=${courseId}&status=approved`)
         .then(res => res.data.length);
+
+const enrollmentService = {
+    getAll: async () => {
+        const response = await api.get('/enrollments');
+        return response.data;
+    },
+    
+    getById: async (id) => {
+        const response = await api.get(`/enrollments/${id}`);
+        return response.data;
+    }
+};
+
+export default enrollmentService;

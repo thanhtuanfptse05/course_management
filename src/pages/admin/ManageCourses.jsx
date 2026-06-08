@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { Container, Row, Col, Table, Badge, Button } from 'react-bootstrap';
+import Header from '../../components/layout/Header';
+import Footer from '../../components/layout/Footer';
+import Sidebar from '../../components/layout/Sidebar';
 import './ManageCourses.css';
 
 // 1. Component Thống kê
@@ -70,22 +73,29 @@ class CourseTable extends React.Component {
 class ManageCourses extends React.Component {
     render() {
         return (
-            <div className="courses-container">
-                <Container fluid>
-                    <Row>
-                        <Col md={12}>
-                            <h2 className="page-title">Manage Courses</h2>
+            <div className="d-flex flex-column min-vh-100">
+                <Header />
+                <Container className="py-4 flex-grow-1">
+                    <Row className="gx-4">
+                        <Col lg={3} md={4} className="mb-4">
+                            <Sidebar />
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col md={3}>
-                            <CourseSummary />
-                        </Col>
-                        <Col md={9}>
-                            <CourseTable />
+                        <Col lg={9} md={8}>
+                            <div className="courses-container">
+                                <h2 className="page-title mb-4">Manage Courses</h2>
+                                <Row>
+                                    <Col md={4} className="mb-4">
+                                        <CourseSummary />
+                                    </Col>
+                                    <Col md={8}>
+                                        <CourseTable />
+                                    </Col>
+                                </Row>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
+                <Footer />
             </div>
         );
     }

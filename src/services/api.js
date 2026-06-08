@@ -1,4 +1,4 @@
-// [AI Generated Code - Prompt: "Setup Axios instance với baseURL cho JSON-Server"]
+// [AI Generated Code - Prompt: "Tạo Axios instance kết nối tới cổng 3000 của JSON-Server cho dự án quản lý khóa học"]
 import axios from 'axios';
 
 const api = axios.create({
