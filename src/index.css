@@ -21,3 +21,84 @@
         min-height: auto;
     }
 }
+
+/* Custom variables for Blue and White theme */
+:root {
+  --primary-blue: #0f52ba;
+  --secondary-blue: #3b82f6;
+  --light-blue: #e0f2fe;
+  --bg-light: #f8fafc;
+  --text-navy: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body {
+  background-color: var(--bg-light) !important;
+  color: var(--text-navy) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom Primary Button override */
+.btn-primary {
+  background-color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #0d47a1 !important;
+  border-color: #0d47a1 !important;
+  box-shadow: 0 4px 12px rgba(15, 82, 186, 0.2) !important;
+}
+
+/* Cards Hover Animation */
+.premium-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(15, 82, 186, 0.06) !important;
+}
+
+/* Form input focus styles */
+.form-control:focus {
+  border-color: var(--secondary-blue) !important;
+  box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Password strength bar styles */
+.strength-meter {
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 100%;
+  width: 0;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-weak {
+  width: 33.33%;
+  background-color: #ef4444;
+}
+
+.strength-medium {
+  width: 66.66%;
+  background-color: #f59e0b;
+}
+
+.strength-strong {
+  width: 100%;
+  background-color: #10b981;
+}
+
