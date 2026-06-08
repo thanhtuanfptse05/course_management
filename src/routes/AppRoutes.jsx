@@ -8,6 +8,8 @@ import NotFound from '../components/common/NotFound';
 import StudentDashboard from '../pages/student/StudentDashboard';
 import InstructorDashboard from '../pages/instructor/InstructorDashboard';
 import AdminDashboard from '../pages/admin/AdminDashboard';
+import ManageCategories from '../pages/admin/ManageCategories';
+import ManageUsers from '../pages/admin/ManageUsers';
 import ComponentDemo from '../pages/ComponentDemo';
 
 function AppRoutes() {
@@ -27,6 +29,8 @@ function AppRoutes() {
 
             {/* Admin routes */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/categories" element={<ManageCategories />} />
+            <Route path="/admin/users" element={<ManageUsers />} />
 
             {/* 404 */}
             <Route path="*" element={<NotFound />} />

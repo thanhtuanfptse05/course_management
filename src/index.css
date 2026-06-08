@@ -1,23 +1,219 @@
+/* [AI Generated Code - Prompt: "Cập nhật index.css cấu hình variables, button, card, table và layout theo phong cách Ocean Blue & White"] */
+
+/* Custom variables for Blue and White theme */
+:root {
+  --primary-blue: #0f52ba;
+  --secondary-blue: #3b82f6;
+  --light-blue: #e0f2fe;
+  --bg-light: #f8fafc;
+  --text-navy: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+
+  /* Status Colors */
+  --success-green: #10b981;
+  --warning-yellow: #f59e0b;
+  --danger-red: #ef4444;
+  --cyan-info: #06b6d4;
+
+  /* Light backgrounds for statuses */
+  --primary-light: #e0f2fe;
+  --success-light: #d1fae5;
+  --warning-light: #fef3c7;
+  --danger-light: #fee2e2;
+  --info-light: #ecfeff;
+}
+
+body {
+  background-color: var(--bg-light) !important;
+  color: var(--text-navy) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.text-navy {
+  color: var(--text-navy) !important;
+}
+
+/* Custom Primary Button override */
+.btn-primary {
+  background-color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+  font-weight: 500;
+  border-radius: 8px !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0d47a1 !important;
+  border-color: #0d47a1 !important;
+  box-shadow: 0 4px 12px rgba(15, 82, 186, 0.2) !important;
+}
+
+.btn-primary:active {
+  transform: scale(0.98) !important;
+}
+
+/* Secondary Button Customizer */
+.btn-outline-primary {
+  color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+  border-radius: 8px !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--primary-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(15, 82, 186, 0.15) !important;
+}
+
+.btn-outline-primary:active {
+  transform: scale(0.98) !important;
+}
+
+/* Cards Hover Animation */
+.premium-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(15, 82, 186, 0.06) !important;
+}
+
+/* Stat Icon Background Mapping classes */
+.bg-primary-light {
+  background-color: var(--primary-light) !important;
+}
+
+.bg-success-light {
+  background-color: var(--success-light) !important;
+}
+
+.bg-warning-light {
+  background-color: var(--warning-light) !important;
+}
+
+.bg-danger-light {
+  background-color: var(--danger-light) !important;
+}
+
+.bg-info-light {
+  background-color: var(--info-light) !important;
+}
+
+.text-primary-blue {
+  color: var(--primary-blue) !important;
+}
+
+.text-success-green {
+  color: var(--success-green) !important;
+}
+
+.text-warning-yellow {
+  color: var(--warning-yellow) !important;
+}
+
+.text-danger-red {
+  color: var(--danger-red) !important;
+}
+
+.text-cyan-info {
+  color: var(--cyan-info) !important;
+}
+
+/* Admin custom tables */
+.admin-table th {
+  background-color: var(--light-blue) !important;
+  color: var(--text-navy) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.825rem;
+  letter-spacing: 0.5px;
+  padding: 14px 16px !important;
+  border-bottom: 2px solid var(--border-color) !important;
+}
+
+.admin-table td {
+  padding: 14px 16px !important;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.925rem;
+}
+
+.admin-table tr:hover td {
+  background-color: #f8fafc !important;
+}
+
+/* Search bar control focus override */
+.premium-search-bar .form-control:focus {
+  border-color: var(--secondary-blue) !important;
+  box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Custom list group active item styling for Sidebar */
+.custom-sidebar .list-group-item.active {
+  background-color: var(--light-blue) !important;
+  color: var(--primary-blue) !important;
+  border-left: 4px solid var(--primary-blue) !important;
+  border-color: transparent var(--border-color) transparent transparent;
+  font-weight: 600;
+}
+
+.custom-sidebar .hover-bg-light {
+  color: var(--text-navy) !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-sidebar .hover-bg-light:hover {
+  background-color: #f1f5f9 !important;
+  color: var(--secondary-blue) !important;
+}
+
+/* Pagination design override */
+.premium-pagination .page-item.active .page-link {
+  background-color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+}
+
+.premium-pagination .page-link {
+  color: var(--primary-blue);
+  border-radius: 6px;
+  margin: 0 2px;
+}
+
+.premium-pagination .page-link:hover {
+  background-color: var(--light-blue);
+}
+
+/* Product list transitions and layouts */
 .product-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
 }
 
 .product-card-image {
-    min-height: 180px;
-    object-fit: cover;
+  min-height: 180px;
+  object-fit: cover;
 }
 
 .sidebar-menu {
-    min-height: 280px;
+  min-height: 280px;
 }
 
 @media (max-width: 991px) {
-    .sidebar-menu {
-        min-height: auto;
-    }
+  .sidebar-menu {
+    min-height: auto;
+  }
 }

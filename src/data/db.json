@@ -1,73 +1,83 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Admin User",
       "email": "admin@fpt.edu.vn",
       "password": "123456",
-      "role": "admin"
+      "role": "admin",
+      "isActive": true
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "John Instructor",
       "email": "instructor1@fpt.edu.vn",
       "password": "123456",
-      "role": "instructor"
+      "role": "instructor",
+      "isActive": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Emily Instructor",
       "email": "instructor2@fpt.edu.vn",
       "password": "123456",
-      "role": "instructor"
+      "role": "instructor",
+      "isActive": true
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Alice Student",
       "email": "student1@fpt.edu.vn",
       "password": "123456",
-      "role": "student"
+      "role": "student",
+      "isActive": true
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Bob Student",
       "email": "student2@fpt.edu.vn",
       "password": "123456",
-      "role": "student"
+      "role": "student",
+      "isActive": true
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Charlie Student",
       "email": "student3@fpt.edu.vn",
       "password": "123456",
-      "role": "student"
+      "role": "student",
+      "isActive": true
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Web Development"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mobile Development"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Backend Development"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Design & UI/UX"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Data Science & AI"
+    },
+    {
+      "name": "PRJ",
+      "id": "U95TxGNXWhU"
     }
   ],
   "courses": [
     {
-      "id": 1,
+      "id": "1",
       "title": "ReactJS Fundamentals",
       "description": "Learn the core concepts of ReactJS, components, state, hooks, and routing.",
       "categoryId": 1,
@@ -76,7 +86,7 @@
       "status": "active"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Advanced Next.js & TypeScript",
       "description": "Build high-performance web applications with server-side rendering, App Router, and TypeScript.",
       "categoryId": 1,
@@ -85,7 +95,7 @@
       "status": "active"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Node.js & Express Basics",
       "description": "Introduction to building REST APIs and backend servers with Node.js and Express.",
       "categoryId": 3,
@@ -94,7 +104,7 @@
       "status": "active"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "iOS Development with Swift",
       "description": "Create modern iOS applications using Xcode, Swift, and SwiftUI.",
       "categoryId": 2,
@@ -103,7 +113,7 @@
       "status": "active"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Figma for UI/UX Designers",
       "description": "Master Figma design tools, prototyping, components, auto layout, and responsive layouts.",
       "categoryId": 4,
@@ -112,7 +122,7 @@
       "status": "active"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Python for Data Science",
       "description": "Learn Python basics, Pandas, NumPy, and Matplotlib for data processing and analysis.",
       "categoryId": 5,
@@ -123,34 +133,35 @@
   ],
   "enrollments": [
     {
-      "id": 1,
+      "id": "1",
       "studentId": 4,
       "courseId": 1,
       "status": "approved"
     },
     {
-      "id": 2,
+      "id": "2",
       "studentId": 4,
       "courseId": 2,
       "status": "pending"
     },
     {
-      "id": 3,
+      "id": "3",
       "studentId": 5,
       "courseId": 3,
       "status": "approved"
     },
     {
-      "id": 4,
+      "id": "4",
       "studentId": 6,
       "courseId": 1,
       "status": "rejected"
     },
     {
-      "id": 5,
+      "id": "5",
       "studentId": 5,
       "courseId": 5,
       "status": "pending"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
