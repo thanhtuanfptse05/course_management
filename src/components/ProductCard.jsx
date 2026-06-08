@@ -12,7 +12,7 @@ function ProductCard({ image, title, description, price, category, onViewDetail 
                     className="product-card-image"
                 />
             )}
-            <Card.Body className="d-flex flex-column">
+            <Card.Body className="d-flex flex-column">  
                 <div className="mb-3">
                     <Badge bg="secondary" className="mb-2">
                         {category}
@@ -20,7 +20,7 @@ function ProductCard({ image, title, description, price, category, onViewDetail 
                     <Card.Title>{title}</Card.Title>
                     <Card.Text className="text-muted small">{description}</Card.Text>
                 </div>
-
+            
                 <div className="mt-auto d-flex justify-content-between align-items-center">
                     <div>
                         <span className="h5 mb-0">{price}</span>
