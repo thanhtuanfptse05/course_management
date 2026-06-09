@@ -1,120 +1,77 @@
-// [AI Generated Code - Prompt: "Tạo cấu trúc component Class cho StudentDashboard, áp dụng Badges trạng thái, Progress Bar và Cancel button"]
+// [AI Generated Code - Prompt: "StudentDashboard: Giao diện hiển thị danh sách các khóa học học viên đã tham gia với Badges trạng thái"]
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Badge, Button, ProgressBar } from 'react-bootstrap';
+import { mockDb } from '../../data/mockDb';
+import { Link } from 'react-router-dom';
 
-import React from 'react';
-import { Container, Row, Col, Badge, ProgressBar, Button } from 'react-bootstrap';
-import './StudentDashboard.css';
+const StudentDashboard = () => {
+  const [myEnrollments, setMyEnrollments] = useState([]);
 
-// 1. Component Thông tin hồ sơ (Phần phụ)
-class StudentProfileSummary extends React.Component {
-    render() {
-        return (
-            <div className="profile-summary-card">
-                <h4>Alice Student</h4>
-                <p>student1@fpt.edu.vn</p>
-                <p><strong>2</strong> Enrolled Courses</p>
-            </div>
-        );
-    }
-}
+  useEffect(() => {
+    // Giả lập học viên ID 3 (Alice Student)
+    const studentId = 3;
+    const enrollments = mockDb.enrollments.filter(e => e.studentId === studentId);
+    
+    const enrichedEnrollments = enrollments.map(en => {
+      const course = mockDb.courses.find(c => c.id === en.courseId);
+      return { ...en, course };
+    });
+    
+    setMyEnrollments(enrichedEnrollments);
+  }, []);
 
-// 2. Component Danh sách khóa học dạng Card (Phần chính)
-class EnrolledCourseList extends React.Component {
-    render() {
-        // Dữ liệu giả lập
-        const mockEnrolledCourses = [
-            {
-                id: 1,
-                courseName: 'ReactJS Fundamentals',
-                status: 'approved',
-                progress: 50
-            },
-            {
-                id: 2,
-                courseName: 'Advanced Next.js & TypeScript',
-                status: 'pending',
-                progress: 0
-            },
-            {
-                id: 4,
-                courseName: 'Figma for UI/UX Designers',
-                status: 'rejected',
-                progress: 0
-            }
-        ];
+  return (
+    <Container className="py-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-navy mb-0">Khóa học của tôi</h2>
+        <Button as={Link} to="/" variant="outline-primary">
+          Tìm thêm khóa học
+        </Button>
+      </div>
 
-        return (
-            <Row xs={1} md={2} lg={3} className="g-4">
-                {mockEnrolledCourses.map((enrollment) => (
-                    <Col key={enrollment.id}>
-                        <div className="premium-card d-flex flex-column">
-                            <div className="d-flex justify-content-between align-items-start mb-2">
-                                <h5>{enrollment.courseName}</h5>
-                                <Badge
-                                    bg={
-                                        enrollment.status === 'approved' ? 'success'
-                                        : enrollment.status === 'pending' ? 'warning'
-                                        : 'danger'
-                                    }
-                                    className="badge-status"
-                                >
-                                    {enrollment.status.toUpperCase()}
-                                </Badge>
-                            </div>
-
-                            {/* Chỉ hiển thị Progress bar nếu Approved */}
-                            {enrollment.status === 'approved' && (
-                                <div className="mt-3">
-                                    <small className="text-muted d-block mb-1">Learning Progress: {enrollment.progress}%</small>
-                                    <ProgressBar now={enrollment.progress} className="progress" />
-                                </div>
-                            )}
-
-                            {/* Cảnh báo nếu Rejected */}
-                            {enrollment.status === 'rejected' && (
-                                <div className="mt-3">
-                                    <small className="text-danger">Your enrollment was declined.</small>
-                                </div>
-                            )}
-
-                            {/* Nút hủy đăng ký nếu khóa học chưa hoàn thành 100% */}
-                            {enrollment.progress < 100 && enrollment.status !== 'rejected' && (
-                                <div className="mt-auto pt-3">
-                                    <Button size="sm" className="btn-cancel-enrollment w-100">
-                                        Cancel Enrollment
-                                    </Button>
-                                </div>
-                            )}
-                        </div>
-                    </Col>
-                ))}
-            </Row>
-        );
-    }
-}
-
-// 3. Layout Chính cho Student Dashboard
-class StudentDashboard extends React.Component {
-    render() {
-        return (
-            <div className="student-container">
-                <Container fluid>
-                    <Row>
-                        <Col md={12}>
-                            <h2 className="page-title">My Courses</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={3}>
-                            <StudentProfileSummary />
-                        </Col>
-                        <Col md={9}>
-                            <EnrolledCourseList />
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-        );
-    }
-}
+      {myEnrollments.length === 0 ? (
+        <Card className="text-center py-5 border-0 shadow-sm">
+          <Card.Body>
+            <h5 className="text-muted">Bạn chưa đăng ký khóa học nào.</h5>
+            <Button as={Link} to="/" variant="primary" className="mt-3">Khám phá ngay</Button>
+          </Card.Body>
+        </Card>
+      ) : (
+        <Row xs={1} md={2} lg={3} className="g-4">
+          {myEnrollments.map((en) => (
+            <Col key={en.id}>
+              <Card className="premium-card h-100 overflow-hidden border-0">
+                <Card.Img variant="top" src={en.course?.image} style={{ height: '160px', objectFit: 'cover' }} />
+                <Card.Body className="d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-start mb-2">
+                    <Badge bg={en.status === 'Approved' ? 'success' : en.status === 'Pending' ? 'warning' : 'danger'}>
+                      {en.status === 'Approved' ? 'Đang học' : en.status === 'Pending' ? 'Chờ duyệt' : 'Bị từ chối'}
+                    </Badge>
+                  </div>
+                  <Card.Title className="fw-bold fs-5 mb-3">{en.courseTitle}</Card.Title>
+                  
+                  {en.status === 'Approved' ? (
+                    <div className="mt-auto">
+                      <div className="d-flex justify-content-between small text-muted mb-1">
+                        <span>Tiến độ</span>
+                        <span>0%</span>
+                      </div>
+                      <ProgressBar variant="primary" now={0} style={{ height: '8px' }} className="mb-3" />
+                      <Button variant="primary" size="sm" className="w-100">Tiếp tục học</Button>
+                    </div>
+                  ) : (
+                    <div className="mt-auto pt-3 border-top text-center text-muted small">
+                      {en.status === 'Pending' ? 'Vui lòng chờ Admin phê duyệt.' : 'Đăng ký đã bị từ chối.'}
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
+    </Container>
+  );
+};
 
 export default StudentDashboard;

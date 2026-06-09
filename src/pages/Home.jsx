@@ -5,9 +5,9 @@ import Footer from '../components/layout/Footer';
 
 // Mock data tạm thời, tuần sau sẽ lấy từ JSON-Server
 const mockCourses = [
-    { id: 1, title: 'ReactJS Fundamentals', category: 'Web Dev', price: 'Free' },
-    { id: 2, title: 'Node.js Basics', category: 'Backend', price: '$29' },
-    { id: 3, title: 'UI/UX Design', category: 'Design', price: '$19' },
+    { id: 1, title: 'ReactJS Fundamentals', category: 'Web Dev' },
+    { id: 2, title: 'Node.js Basics', category: 'Backend' },
+    { id: 3, title: 'UI/UX Design', category: 'Design' },
 ];
 
 function Home() {
@@ -36,7 +36,6 @@ function Home() {
                                     <Card.Subtitle className="mb-2 text-muted">
                                         {course.category}
                                     </Card.Subtitle>
-                                    <Card.Text>Price: {course.price}</Card.Text>
                                     <Button variant="primary" size="sm">Register now</Button>
                                 </Card.Body>
                             </Card>

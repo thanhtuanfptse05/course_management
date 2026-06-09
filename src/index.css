@@ -1,23 +1,110 @@
-.product-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* [AI Generated Code - Prompt: "Cấu hình màu sắc Xanh biển - Trắng và hiệu ứng hover cho Card"] */
+/* Custom variables for Blue and White theme */
+:root {
+  --primary-blue: #0f52ba;
+  --secondary-blue: #3b82f6;
+  --light-blue: #e0f2fe;
+  --bg-light: #f8fafc;
+  --text-navy: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
 }
 
-.product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
+body {
+  background-color: var(--bg-light) !important;
+  color: var(--text-navy) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.product-card-image {
-    min-height: 180px;
-    object-fit: cover;
+/* Custom Primary Button override */
+.btn-primary {
+  background-color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
 
-.sidebar-menu {
-    min-height: 280px;
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #0d47a1 !important;
+  border-color: #0d47a1 !important;
+  box-shadow: 0 4px 12px rgba(15, 82, 186, 0.2) !important;
 }
 
-@media (max-width: 991px) {
-    .sidebar-menu {
-        min-height: auto;
-    }
+/* Secondary / Outline Button */
+.btn-outline-primary {
+  color: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+  transition: all 0.2s ease-in-out;
 }
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-blue) !important;
+  color: white !important;
+}
+
+/* Button Active state micro-animation */
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Cards Hover Animation */
+.premium-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(15, 82, 186, 0.08) !important;
+}
+
+/* Sidebar Active Item styling */
+.custom-sidebar .list-group-item {
+  color: var(--text-navy);
+  border: none;
+  background: transparent;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
+  border-radius: 4px;
+}
+
+.custom-sidebar .list-group-item:hover {
+  background-color: #f1f5f9 !important;
+  color: var(--secondary-blue) !important;
+}
+
+.custom-sidebar .list-group-item.active {
+  background-color: var(--light-blue) !important;
+  color: var(--primary-blue) !important;
+  border-left: 3px solid var(--primary-blue) !important;
+  font-weight: 600;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Input Focus state */
+.form-control:focus, .form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15);
+}
+
+/* Table styling */
+.table-premium thead th {
+  background-color: var(--light-blue);
+  color: var(--text-navy);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border-bottom: none;
+}
+
+.table-premium tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Badges */
+.badge-success { background-color: #10b981; color: white; }
+.badge-warning { background-color: #f59e0b; color: white; }
+.badge-danger { background-color: #ef4444; color: white; }
+.badge-info { background-color: #06b6d4; color: white; }
