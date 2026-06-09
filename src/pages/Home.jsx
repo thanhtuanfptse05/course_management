@@ -9,54 +9,9 @@ import './Home.css';
 
 // ─── Mock data 6 khóa học mẫu ───────────────────────────────────────────────
 const mockCourses = [
-    {
-        id: 1,
-        title: 'ReactJS Fundamentals',
-        category: 'Web Dev',
-        price: 'Miễn phí',
-        instructorName: 'Nguyễn Văn An',
-        thumbnail: 'https://placehold.co/400x220/0f52ba/ffffff?text=ReactJS',
-    },
-    {
-        id: 2,
-        title: 'Node.js Căn bản cho người mới bắt đầu',
-        category: 'Backend',
-        price: '299.000đ',
-        instructorName: 'Trần Thị Bình',
-        thumbnail: 'https://placehold.co/400x220/3b82f6/ffffff?text=NodeJS',
-    },
-    {
-        id: 3,
-        title: 'UI/UX Design Pro — Thiết kế giao diện',
-        category: 'Design',
-        price: '199.000đ',
-        instructorName: 'Lê Văn Cường',
-        thumbnail: 'https://placehold.co/400x220/06b6d4/ffffff?text=UI%2FUX',
-    },
-    {
-        id: 4,
-        title: 'Python cho người mới hoàn toàn',
-        category: 'Backend',
-        price: '149.000đ',
-        instructorName: 'Phạm Thị Dung',
-        thumbnail: 'https://placehold.co/400x220/0f52ba/ffffff?text=Python',
-    },
-    {
-        id: 5,
-        title: 'Figma Mastery — Thiết kế từ A đến Z',
-        category: 'Design',
-        price: 'Miễn phí',
-        instructorName: 'Hoàng Văn Em',
-        thumbnail: 'https://placehold.co/400x220/3b82f6/ffffff?text=Figma',
-    },
-    {
-        id: 6,
-        title: 'CSS & Bootstrap 5 nâng cao',
-        category: 'Web Dev',
-        price: '99.000đ',
-        instructorName: 'Vũ Thị Phương',
-        thumbnail: 'https://placehold.co/400x220/06b6d4/ffffff?text=Bootstrap',
-    },
+    { id: 1, title: 'ReactJS Fundamentals', category: 'Web Dev' },
+    { id: 2, title: 'Node.js Basics', category: 'Backend' },
+    { id: 3, title: 'UI/UX Design', category: 'Design' },
 ];
 
 const CATEGORIES = ['Tất cả', 'Web Dev', 'Backend', 'Design'];
@@ -88,25 +43,27 @@ function Home() {
             {/* ── Khối A: Hero Section ────────────────────────────────── */}
             <section className="home-hero d-flex align-items-center">
                 <Container>
-                    <Row className="justify-content-center text-center">
-                        <Col lg={8}>
-                            <p className="home-hero-subtitle mb-2">Nền tảng học trực tuyến</p>
-                            <h1 className="home-hero-title mb-3">
-                                Khám phá Khóa học<br />
-                                <span className="home-hero-highlight">dành riêng cho bạn</span>
-                            </h1>
-                            <p className="home-hero-desc mb-4">
-                                Hơn 100+ khóa học chất lượng cao từ các giảng viên hàng đầu.
-                                Học bất cứ lúc nào, bất cứ đâu.
-                            </p>
-                            <Button
-                                variant="light"
-                                size="lg"
-                                className="home-hero-btn"
-                                onClick={handleExploreClick}
-                            >
-                                🎓 Xem tất cả khóa học
-                            </Button>
+                    <h1>Welcome to CourseMGT</h1>
+                    <p className="lead">Learn anytime, anywhere. Browse our top courses.</p>
+                    <Button variant="light" size="lg">Explore Courses</Button>
+                </Container>
+            </div>
+
+            {/* Course list */}
+            <Container className="py-5">
+                <h2 className="mb-4">Example Courses</h2>
+                <Row>
+                    {mockCourses.map(course => (
+                        <Col md={4} key={course.id} className="mb-4">
+                            <Card className="h-100 shadow-sm">
+                                <Card.Body>
+                                    <Card.Title>{course.title}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">
+                                        {course.category}
+                                    </Card.Subtitle>
+                                    <Button variant="primary" size="sm">Register now</Button>
+                                </Card.Body>
+                            </Card>
                         </Col>
                     </Row>
                 </Container>

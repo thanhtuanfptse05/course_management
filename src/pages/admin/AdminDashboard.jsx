@@ -1,295 +1,61 @@
-// [AI Generated Code - Prompt: "Thiết kế trang AdminDashboard bằng Tiếng Việt dùng Header, Footer, Sidebar phân quyền, tích hợp dữ liệu thật từ các dịch vụ courseService, userService, enrollmentService để hiển thị stats và bảng hoạt động"]
+// [AI Generated Code - Prompt: "AdminDashboard: Các thẻ thống kê (Dashboard Cards) nổi bật và layout bảng thống kê"]
+import React from 'react';
+import { Row, Col, Card } from 'react-bootstrap';
+import { mockDb } from '../../data/mockDb';
 
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Table, Badge, Card } from 'react-bootstrap';
-import Header from '../../components/layout/Header';
-import Footer from '../../components/layout/Footer';
-import Sidebar from '../../components/layout/Sidebar';
-import { useAuth } from '../../contexts/AuthContext';
-import courseService from '../../services/courseService';
-import userService from '../../services/userService';
-import enrollmentService from '../../services/enrollmentService';
-import StatCard from '../../components/shared/StatCard';
-import Loading from '../../components/common/Loading';
+const AdminDashboard = () => {
+  return (
+    <>
+      <h2 className="fw-bold text-navy mb-4">Bảng Thống kê Tổng quan</h2>
+      
+      <Row className="g-4 mb-5">
+        <Col md={4}>
+          <Card className="premium-card bg-primary text-white border-0">
+            <Card.Body className="p-4 d-flex align-items-center justify-content-between">
+              <div>
+                <p className="mb-1 text-white-50 fw-medium text-uppercase small">Tổng số học viên</p>
+                <h3 className="fw-bold mb-0">{mockDb.stats.totalStudents}</h3>
+              </div>
+              <div className="fs-1 opacity-50">👤</div>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <Card className="premium-card bg-success text-white border-0">
+            <Card.Body className="p-4 d-flex align-items-center justify-content-between">
+              <div>
+                <p className="mb-1 text-white-50 fw-medium text-uppercase small">Tổng số khóa học</p>
+                <h3 className="fw-bold mb-0">{mockDb.stats.totalCourses}</h3>
+              </div>
+              <div className="fs-1 opacity-50">📚</div>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <Card className="premium-card bg-warning text-white border-0">
+            <Card.Body className="p-4 d-flex align-items-center justify-content-between">
+              <div>
+                <p className="mb-1 text-white-50 fw-medium text-uppercase small">Doanh thu dự kiến</p>
+                <h3 className="fw-bold mb-0">${mockDb.stats.totalRevenue}</h3>
+              </div>
+              <div className="fs-1 opacity-50">💰</div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
 
-function AdminDashboard() {
-    const { currentUser } = useAuth();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [stats, setStats] = useState({
-        totalCourses: 0,
-        totalStudents: 0,
-        totalInstructors: 0
-    });
-    const [recentCourses, setRecentCourses] = useState([]);
-    const [recentEnrollments, setRecentEnrollments] = useState([]);
-
-    useEffect(() => {
-        const fetchDashboardData = async () => {
-            try {
-                setLoading(true);
-                const [courses, users, enrollments] = await Promise.all([
-                    courseService.getAll(),
-                    userService.getAll(),
-                    enrollmentService.getAll()
-                ]);
-
-                // Tính toán thống kê
-                const totalCourses = courses.length;
-                const totalStudents = users.filter(u => u.role === 'student').length;
-                const totalInstructors = users.filter(u => u.role === 'instructor').length;
-
-                setStats({
-                    totalCourses,
-                    totalStudents,
-                    totalInstructors
-                });
-
-                // Lấy 5 khóa học gần đây nhất
-                const sortedCourses = [...courses].reverse().slice(0, 5);
-                setRecentCourses(sortedCourses);
-
-                // Lấy 5 đơn đăng ký gần đây nhất
-                const enrichedEnrollments = enrollments.map(en => {
-                    const student = users.find(u => u.id === en.studentId);
-                    const course = courses.find(c => c.id === en.courseId);
-                    return {
-                        ...en,
-                        studentName: student ? student.name : 'Chưa rõ',
-                        studentEmail: student ? student.email : '',
-                        courseTitle: course ? course.title : 'Khóa học đã bị xóa'
-                    };
-                }).reverse().slice(0, 5);
-                setRecentEnrollments(enrichedEnrollments);
-
-                setLoading(false);
-            } catch (err) {
-                console.error(err);
-                setError('Không thể tải dữ liệu thống kê. Vui lòng kiểm tra JSON-Server.');
-                setLoading(false);
-            }
-        };
-
-        fetchDashboardData();
-    }, []);
-
-    if (loading) {
-        return (
-            <div className="d-flex flex-column min-vh-100">
-                <Header />
-                <Container className="py-4 flex-grow-1">
-                    <Row className="gx-4">
-                        <Col lg={3} md={4} className="mb-4">
-                            <Sidebar />
-                        </Col>
-                        <Col lg={9} md={8}>
-                            <Loading message="Đang phân tích dữ liệu hệ thống..." />
-                        </Col>
-                    </Row>
-                </Container>
-                <Footer />
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="d-flex flex-column min-vh-100">
-                <Header />
-                <Container className="py-4 flex-grow-1">
-                    <Row className="gx-4">
-                        <Col lg={3} md={4} className="mb-4">
-                            <Sidebar />
-                        </Col>
-                        <Col lg={9} md={8}>
-                            <div className="alert alert-danger" role="alert">
-                                {error}
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-                <Footer />
-            </div>
-        );
-    }
-
-    return (
-        <div className="d-flex flex-column min-vh-100">
-            <Header />
-            
-            <Container className="py-4 flex-grow-1">
-                <Row className="gx-4">
-                    {/* Thanh điều hướng bên trái (Sidebar) */}
-                    <Col lg={3} md={4} className="mb-4">
-                        <Sidebar />
-                    </Col>
-
-                    {/* Vùng nội dung chính */}
-                    <Col lg={9} md={8}>
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                            <div>
-                                <h1 className="h2 fw-bold text-navy mb-1" style={{ fontSize: '1.85rem' }}>Bảng điều khiển</h1>
-                                <p className="text-muted mb-0">Thống kê và hoạt động hệ thống quản lý khóa học.</p>
-                            </div>
-                            <span className="badge bg-danger px-3 py-2 text-uppercase">Quản Trị Viên</span>
-                        </div>
-
-                        {/* Stats Cards Row */}
-                        <Row className="g-3 g-lg-4 mb-4">
-                            <Col xs={12} sm={6} lg={4}>
-                                <StatCard
-                                    title="Tổng khóa học"
-                                    value={stats.totalCourses}
-                                    color="primary"
-                                    subtitle="Khóa học trên hệ thống"
-                                    icon={
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
-                                            <path fillRule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z"/>
-                                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
-                                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
-                                        </svg>
-                                    }
-                                />
-                            </Col>
-                            <Col xs={12} sm={6} lg={4}>
-                                <StatCard
-                                    title="Tổng học viên"
-                                    value={stats.totalStudents}
-                                    color="success"
-                                    subtitle="Tài khoản học tập"
-                                    icon={
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-people-fill" viewBox="0 0 16 16">
-                                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
-                                        </svg>
-                                    }
-                                />
-                            </Col>
-                            <Col xs={12} sm={12} lg={4}>
-                                <StatCard
-                                    title="Giảng viên"
-                                    value={stats.totalInstructors}
-                                    color="warning"
-                                    subtitle="Chuyên gia đào tạo"
-                                    icon={
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-workspace" viewBox="0 0 16 16">
-                                            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                                            <path d="M14 8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5zM2 12h12v.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5z"/>
-                                        </svg>
-                                    }
-                                />
-                            </Col>
-                        </Row>
-
-                        {/* Thẻ chào mừng quản trị viên */}
-                        <Card className="premium-card shadow-sm border-0 p-4 mb-4" style={{ background: 'linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%)' }}>
-                            <Card.Body className="p-0">
-                                <h4 className="fw-bold text-navy mb-2">Chào mừng trở lại, {currentUser?.name}!</h4>
-                                <p className="text-muted small mb-0">
-                                    Sử dụng menu bên trái để quản lý danh mục khóa học, duyệt khóa học, phân quyền tài khoản người dùng và xét duyệt đăng ký của học viên.
-                                </p>
-                            </Card.Body>
-                        </Card>
-
-                        {/* Tables Row */}
-                        <Row className="g-4">
-                            {/* Recent Courses */}
-                            <Col xs={12} lg={6}>
-                                <Card className="premium-card border-0 shadow-sm rounded-3 overflow-hidden">
-                                    <Card.Header className="bg-white py-3 border-bottom-0">
-                                        <h5 className="fw-bold text-navy mb-0" style={{ fontSize: '1rem' }}>Khóa học mới cập nhật</h5>
-                                    </Card.Header>
-                                    <Card.Body className="p-0">
-                                        <div className="table-responsive">
-                                            <Table className="premium-table align-middle mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tên khóa học</th>
-                                                        <th>Giá</th>
-                                                        <th>Trạng thái</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {recentCourses.map(course => (
-                                                        <tr key={course.id}>
-                                                            <td className="fw-semibold text-navy">{course.title}</td>
-                                                            <td>
-                                                                {course.price === 0 || course.price === 'Free' ? (
-                                                                    <Badge bg="success">Miễn phí</Badge>
-                                                                ) : (
-                                                                    <span className="text-secondary">{course.price.toLocaleString('vi-VN')}đ</span>
-                                                                )}
-                                                            </td>
-                                                            <td>
-                                                                <Badge bg={course.status === 'active' ? 'primary' : 'secondary'}>
-                                                                    {course.status === 'active' ? 'Hoạt động' : 'Ẩn'}
-                                                                </Badge>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </Table>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-
-                            {/* Recent Enrollments */}
-                            <Col xs={12} lg={6}>
-                                <Card className="premium-card border-0 shadow-sm rounded-3 overflow-hidden">
-                                    <Card.Header className="bg-white py-3 border-bottom-0">
-                                        <h5 className="fw-bold text-navy mb-0" style={{ fontSize: '1rem' }}>Hoạt động đăng ký gần đây</h5>
-                                    </Card.Header>
-                                    <Card.Body className="p-0">
-                                        <div className="table-responsive">
-                                            <Table className="premium-table align-middle mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Học viên</th>
-                                                        <th>Khóa học</th>
-                                                        <th>Trạng thái</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {recentEnrollments.map(en => {
-                                                        const statusColors = {
-                                                            approved: 'success',
-                                                            pending: 'warning',
-                                                            rejected: 'danger'
-                                                        };
-                                                        const statusText = {
-                                                            approved: 'Đã duyệt',
-                                                            pending: 'Chờ duyệt',
-                                                            rejected: 'Từ chối'
-                                                        };
-                                                        return (
-                                                            <tr key={en.id}>
-                                                                <td>
-                                                                    <div className="fw-semibold text-navy">{en.studentName}</div>
-                                                                    <div className="text-muted" style={{ fontSize: '0.8rem' }}>{en.studentEmail}</div>
-                                                                </td>
-                                                                <td className="text-truncate" style={{ maxWidth: '180px' }}>{en.courseTitle}</td>
-                                                                <td>
-                                                                    <Badge bg={statusColors[en.status] || 'secondary'}>
-                                                                        {statusText[en.status] || en.status}
-                                                                    </Badge>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    })}
-                                                </tbody>
-                                            </Table>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-
-            <Footer />
-        </div>
-    );
-}
+      <Row>
+        <Col>
+          <Card className="border-0 shadow-sm">
+            <Card.Body>
+              <h5 className="fw-bold text-navy mb-4">Hoạt động gần đây</h5>
+              <p className="text-muted">Chưa có dữ liệu hoạt động mới trong tuần này.</p>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </>
+  );
+};
 
 export default AdminDashboard;

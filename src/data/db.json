@@ -82,7 +82,6 @@
       "description": "Learn the core concepts of ReactJS, components, state, hooks, and routing.",
       "categoryId": 1,
       "instructorId": 2,
-      "price": 0,
       "status": "active"
     },
     {
@@ -91,7 +90,6 @@
       "description": "Build high-performance web applications with server-side rendering, App Router, and TypeScript.",
       "categoryId": 1,
       "instructorId": 2,
-      "price": 49,
       "status": "active"
     },
     {
@@ -100,7 +98,6 @@
       "description": "Introduction to building REST APIs and backend servers with Node.js and Express.",
       "categoryId": 3,
       "instructorId": 3,
-      "price": 29,
       "status": "active"
     },
     {
@@ -109,7 +106,6 @@
       "description": "Create modern iOS applications using Xcode, Swift, and SwiftUI.",
       "categoryId": 2,
       "instructorId": 2,
-      "price": 79,
       "status": "active"
     },
     {
@@ -118,7 +114,6 @@
       "description": "Master Figma design tools, prototyping, components, auto layout, and responsive layouts.",
       "categoryId": 4,
       "instructorId": 3,
-      "price": 19,
       "status": "active"
     },
     {
@@ -127,7 +122,6 @@
       "description": "Learn Python basics, Pandas, NumPy, and Matplotlib for data processing and analysis.",
       "categoryId": 5,
       "instructorId": 3,
-      "price": 0,
       "status": "active"
     }
   ],

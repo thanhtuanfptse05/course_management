@@ -15,7 +15,6 @@ const allProducts = [
         id: 1,
         title: 'React Fundamentals',
         description: 'Build reusable UI with React components and hooks.',
-        price: '$49',
         category: 'Web Development',
         image: 'https://via.placeholder.com/500x300?text=React',
     },
@@ -23,7 +22,6 @@ const allProducts = [
         id: 2,
         title: 'JavaScript Essentials',
         description: 'Master vanilla JavaScript and modern ES6+ patterns.',
-        price: '$39',
         category: 'Programming',
         image: 'https://via.placeholder.com/500x300?text=JavaScript',
     },
@@ -31,7 +29,6 @@ const allProducts = [
         id: 3,
         title: 'UI/UX Design Basics',
         description: 'Learn design principles for responsive interfaces.',
-        price: '$35',
         category: 'Design',
         image: 'https://via.placeholder.com/500x300?text=UI/UX',
     },
@@ -39,7 +36,6 @@ const allProducts = [
         id: 4,
         title: 'Bootstrap Layouts',
         description: 'Create responsive pages with Bootstrap grid and utilities.',
-        price: '$29',
         category: 'Frontend',
         image: 'https://via.placeholder.com/500x300?text=Bootstrap',
     },
@@ -47,7 +43,6 @@ const allProducts = [
         id: 5,
         title: 'React Router',
         description: 'Build single-page applications with route navigation.',
-        price: '$25',
         category: 'Routing',
         image: 'https://via.placeholder.com/500x300?text=Router',
     },
@@ -55,7 +50,6 @@ const allProducts = [
         id: 6,
         title: 'Project Management',
         description: 'Organize feature work with reusable components.',
-        price: '$19',
         category: 'Planning',
         image: 'https://via.placeholder.com/500x300?text=Planning',
     },
@@ -214,9 +208,6 @@ function ComponentDemo() {
                         <p>{selectedProduct?.description}</p>
                         <p className="mb-0">
                             <strong>Category:</strong> {selectedProduct?.category}
-                        </p>
-                        <p>
-                            <strong>Price:</strong> {selectedProduct?.price}
                         </p>
                     </>
                 }
